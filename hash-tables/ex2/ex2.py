@@ -1,32 +1,29 @@
 def reconstruct_trip(tickets):
-    
-  hash_table = {}
-  
+     
+  newTickets = dict((ticket) for ticket in tickets)
+ 
+  location = None
   route = []
-  
-  for ticket in tickets:
-    hash_table[ticket[0]] = ticket[1]
-  
-  current = hash_table[None]
-  
-  while current is not None:
-    route.append(current)
-    if current in hash_table:
-      current = hash_table[current]
-  return route
+  def pieceTicket(loc):
+     if(newTickets.get(loc)):
+          route.append(newTickets.get(loc, "EndTicket"))
+          print(route)
+          location = newTickets.get(loc, "EndTicket")
+          loca = newTickets.get(loc, "EndTicket")
+          print(location, loca)
+          if(location):
+              pieceTicket(location)
+  pieceTicket(location)
+  if (len(route) < (len(newTickets) - 1)):
+      return([])
+  return(route)
 
 if __name__ == '__main__':
   # You can write code here to test your implementation using the Python repl
-  tickets = [
-    ('PIT', 'ORD'),
-    ('XNA', 'CID'),
-    ('SFO', 'BHM'),
-    ('FLG', 'XNA'),
-    (None, 'LAX'), 
-    ('LAX', 'SFO'),
-    ('CID', 'SLC'),
-    ('ORD', None),
-    ('SLC', 'PIT'),
-    ('BHM', 'FLG'),
-  ]
-  print(reconstruct_trip(tickets))
+  reconstruct_trip([
+          ('LHD', 'DAB'),
+          (None, 'HVN'),
+          ('MSO', 'SFO'),
+          ('RDU', 'ABQ'),
+          ('ACY', None),
+  ])
